@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Search, Menu, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const Header = () => {
-  const [activeTab, setActiveTab] = useState("Главная");
+  const location = useLocation();
 
-  const tabs = ["Главная", "Все услуги", "Рейтинги", "Новости", "Поддержка"];
+  const tabs = [
+    { name: "Главная", path: "/" },
+    { name: "Все услуги", path: "/services" },
+    { name: "Рейтинги", path: "/ratings" },
+    { name: "Новости", path: "/news" },
+    { name: "Поддержка", path: "/support" },
+  ];
 
   return (
     <header className="bg-white shadow-sm border-b">
@@ -14,14 +21,14 @@ const Header = () => {
         {/* Top bar */}
         <div className="flex items-center justify-between py-4">
           <div className="flex items-center space-x-8">
-            <div className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">Б</span>
               </div>
               <span className="text-xl font-bold text-gray-900">
                 БизнесСервис
               </span>
-            </div>
+            </Link>
 
             {/* Search */}
             <div className="relative flex-1 max-w-md">
@@ -47,17 +54,17 @@ const Header = () => {
         {/* Navigation */}
         <nav className="flex space-x-8 border-t pt-4 pb-4">
           {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
+            <Link
+              key={tab.name}
+              to={tab.path}
               className={`text-sm font-medium transition-colors pb-2 border-b-2 ${
-                activeTab === tab
+                location.pathname === tab.path
                   ? "text-blue-600 border-blue-600"
                   : "text-gray-600 hover:text-gray-900 border-transparent hover:border-gray-300"
               }`}
             >
-              {tab}
-            </button>
+              {tab.name}
+            </Link>
           ))}
         </nav>
       </div>
