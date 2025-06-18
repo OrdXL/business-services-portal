@@ -1,11 +1,13 @@
+import { useState } from "react";
 import { Star, ArrowRight, Shield, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const FeaturedServices = () => {
+  const [showAll, setShowAll] = useState(false);
   const services = [
     {
       category: "Банковские услуги",
-      title: "Тинькофф Бизнес",
+      title: "Тинькофь Бизнес",
       description: "Расчетный счет для ИП и ООО без комиссий за ведение",
       rating: 4.8,
       reviews: 1247,
@@ -37,7 +39,42 @@ const FeaturedServices = () => {
       badge: "Выбор редакции",
       logo: "📦",
     },
+    {
+      category: "Страхование",
+      title: "Альфа Страхование",
+      description: "Комплексное страхование бизнеса и ответственности",
+      rating: 4.5,
+      reviews: 456,
+      features: ["ОСАГО", "Страхование офиса", "Онлайн оформление"],
+      price: "От 1200 ₽/год",
+      badge: "Надежно",
+      logo: "🛡️",
+    },
+    {
+      category: "Логистика",
+      title: "СДЭК",
+      description: "Доставка и логистические решения для интернет-магазинов",
+      rating: 4.4,
+      reviews: 789,
+      features: ["Курьерская доставка", "Постаматы", "Международная доставка"],
+      price: "От 150 ₽/отправление",
+      badge: "Быстро",
+      logo: "📦",
+    },
+    {
+      category: "Маркетинг",
+      title: "Яндекс.Директ",
+      description: "Контекстная реклама для привлечения клиентов",
+      rating: 4.3,
+      reviews: 1123,
+      features: ["Настройка кампаний", "Аналитика", "Автоматизация"],
+      price: "От 300 ₽/день",
+      badge: "Эффективно",
+      logo: "📈",
+    },
   ];
+
+  const displayedServices = showAll ? services : services.slice(0, 3);
 
   return (
     <section className="py-16 bg-gray-50">
@@ -52,7 +89,7 @@ const FeaturedServices = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {services.map((service) => (
+          {displayedServices.map((service) => (
             <div
               key={service.title}
               className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
@@ -120,8 +157,12 @@ const FeaturedServices = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" className="px-8 py-3">
-            Посмотреть все рекомендации
+          <Button
+            variant="outline"
+            className="px-8 py-3"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ? "Скрыть" : "Посмотреть все рекомендации"}
           </Button>
         </div>
       </div>

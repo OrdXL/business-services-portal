@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   CreditCard,
   TrendingUp,
@@ -10,6 +11,7 @@ import {
 } from "lucide-react";
 
 const ServiceCategories = () => {
+  const [showAll, setShowAll] = useState(false);
   const categories = [
     {
       icon: CreditCard,
@@ -82,7 +84,7 @@ const ServiceCategories = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((category) => {
+          {(showAll ? categories : categories.slice(0, 6)).map((category) => {
             const IconComponent = category.icon;
             return (
               <div
@@ -112,8 +114,11 @@ const ServiceCategories = () => {
         </div>
 
         <div className="text-center mt-12">
-          <button className="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
-            Посмотреть все категории
+          <button
+            className="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ? "Скрыть" : "Посмотреть все категории"}
           </button>
         </div>
       </div>
