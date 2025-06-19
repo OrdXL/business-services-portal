@@ -16,18 +16,21 @@ const Services = () => {
       title: "Бухгалтерия и учёт",
       services: [
         {
+          id: "bookkeeping",
           name: "Ведение бухучёта",
           price: "от 15 000 ₽",
           rating: 4.8,
           reviews: 124,
         },
         {
+          id: "tax-reporting",
           name: "Налоговая отчётность",
           price: "от 8 000 ₽",
           rating: 4.9,
           reviews: 89,
         },
         {
+          id: "payroll",
           name: "Расчёт зарплаты",
           price: "от 5 000 ₽",
           rating: 4.7,
@@ -36,21 +39,50 @@ const Services = () => {
       ],
     },
     {
+      title: "Финансирование",
+      services: [
+        {
+          id: "business-loans",
+          name: "Бизнес-кредитование",
+          price: "от 10% годовых",
+          rating: 4.6,
+          reviews: 189,
+        },
+        {
+          id: "leasing",
+          name: "Лизинг оборудования",
+          price: "от 8% годовых",
+          rating: 4.7,
+          reviews: 134,
+        },
+        {
+          id: "factoring",
+          name: "Факторинг",
+          price: "от 12% годовых",
+          rating: 4.5,
+          reviews: 76,
+        },
+      ],
+    },
+    {
       title: "Юридические услуги",
       services: [
         {
+          id: "company-registration",
           name: "Регистрация ООО",
           price: "от 3 000 ₽",
           rating: 4.9,
           reviews: 203,
         },
         {
+          id: "contracts",
           name: "Составление договоров",
           price: "от 2 500 ₽",
           rating: 4.8,
           reviews: 178,
         },
         {
+          id: "legal-support",
           name: "Юридическое сопровождение",
           price: "от 20 000 ₽",
           rating: 4.9,
@@ -59,25 +91,80 @@ const Services = () => {
       ],
     },
     {
+      title: "ИТ и автоматизация",
+      services: [
+        {
+          id: "crm-systems",
+          name: "Внедрение CRM систем",
+          price: "от 30 000 ₽",
+          rating: 4.6,
+          reviews: 98,
+        },
+        {
+          id: "1c-implementation",
+          name: "Настройка 1С",
+          price: "от 15 000 ₽",
+          rating: 4.8,
+          reviews: 167,
+        },
+        {
+          id: "website-development",
+          name: "Создание сайтов",
+          price: "от 25 000 ₽",
+          rating: 4.8,
+          reviews: 145,
+        },
+      ],
+    },
+    {
       title: "Маркетинг и реклама",
       services: [
         {
+          id: "contextual-ads",
           name: "Контекстная реклама",
           price: "от 10 000 ₽",
           rating: 4.6,
           reviews: 234,
         },
         {
+          id: "smm",
           name: "SMM продвижение",
           price: "от 8 000 ₽",
           rating: 4.7,
           reviews: 189,
         },
         {
-          name: "Создание сайтов",
+          id: "seo",
+          name: "SEO продвижение",
+          price: "от 12 000 ₽",
+          rating: 4.5,
+          reviews: 156,
+        },
+      ],
+    },
+    {
+      title: "Страхование и безопасность",
+      services: [
+        {
+          id: "business-insurance",
+          name: "Страхование бизнеса",
+          price: "от 5 000 ₽",
+          rating: 4.7,
+          reviews: 123,
+        },
+        {
+          id: "security-audit",
+          name: "Аудит безопасности",
           price: "от 25 000 ₽",
           rating: 4.8,
-          reviews: 145,
+          reviews: 67,
+        },
+        {
+          id: "cyber-insurance",
+          name: "Киберстрахование",
+          price: "от 8 000 ₽",
+          rating: 4.6,
+          reviews: 45,
         },
       ],
     },
@@ -144,7 +231,14 @@ const Services = () => {
                           <span>Гарантия</span>
                         </div>
                       </div>
-                      <Button className="w-full">Заказать услугу</Button>
+                      <Button
+                        className="w-full"
+                        onClick={() =>
+                          window.open(`/service/${service.id}`, "_blank")
+                        }
+                      >
+                        Подробнее
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}
