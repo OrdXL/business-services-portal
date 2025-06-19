@@ -8,10 +8,200 @@ import {
   Scale,
   Building2,
   Truck,
+  Star,
+  MapPin,
+  Phone,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const ServiceCategories = () => {
   const [showAll, setShowAll] = useState(false);
+
+  const companyData = {
+    "Банковские услуги": [
+      {
+        name: "Тинькофф Банк",
+        rating: 4.8,
+        reviews: 1247,
+        location: "Москва",
+        phone: "+7 495 123-45-67",
+        description: "Расчетные счета, кредиты, эквайринг",
+      },
+      {
+        name: "Сбербанк",
+        rating: 4.5,
+        reviews: 2340,
+        location: "Москва",
+        phone: "+7 495 234-56-78",
+        description: "Полный спектр банковских услуг",
+      },
+      {
+        name: "Альфа-Банк",
+        rating: 4.6,
+        reviews: 1890,
+        location: "Москва",
+        phone: "+7 495 345-67-89",
+        description: "Банк для бизнеса и частных лиц",
+      },
+    ],
+    "Маркетинг и реклама": [
+      {
+        name: "Яндекс.Директ",
+        rating: 4.7,
+        reviews: 3450,
+        location: "Москва",
+        phone: "+7 495 456-78-90",
+        description: "Контекстная реклама",
+      },
+      {
+        name: "Google Ads",
+        rating: 4.5,
+        reviews: 2890,
+        location: "Москва",
+        phone: "+7 495 567-89-01",
+        description: "Реклама в поиске Google",
+      },
+      {
+        name: "VK Реклама",
+        rating: 4.3,
+        reviews: 1234,
+        location: "СПб",
+        phone: "+7 812 678-90-12",
+        description: "Таргетированная реклама ВК",
+      },
+    ],
+    "HR и кадровые услуги": [
+      {
+        name: "HeadHunter",
+        rating: 4.6,
+        reviews: 5670,
+        location: "Москва",
+        phone: "+7 495 789-01-23",
+        description: "Поиск и подбор персонала",
+      },
+      {
+        name: "Superjob",
+        rating: 4.4,
+        reviews: 3210,
+        location: "Москва",
+        phone: "+7 495 890-12-34",
+        description: "Кадровое агентство",
+      },
+    ],
+    "Бухгалтерия и учет": [
+      {
+        name: "1С:Предприятие",
+        rating: 4.5,
+        reviews: 4560,
+        location: "Москва",
+        phone: "+7 495 901-23-45",
+        description: "Автоматизация учета",
+      },
+      {
+        name: "МойСклад",
+        rating: 4.7,
+        reviews: 2340,
+        location: "Москва",
+        phone: "+7 495 012-34-56",
+        description: "Облачная система учета",
+      },
+    ],
+    "IT-решения": [
+      {
+        name: "amoCRM",
+        rating: 4.8,
+        reviews: 6780,
+        location: "Москва",
+        phone: "+7 495 123-45-67",
+        description: "CRM для автоматизации продаж",
+      },
+      {
+        name: "Битрикс24",
+        rating: 4.4,
+        reviews: 4320,
+        location: "Москва",
+        phone: "+7 495 234-56-78",
+        description: "Корпоративный портал",
+      },
+      {
+        name: "RetailCRM",
+        rating: 4.6,
+        reviews: 2890,
+        location: "СПб",
+        phone: "+7 812 345-67-89",
+        description: "CRM для розничной торговли",
+      },
+    ],
+    "Юридические услуги": [
+      {
+        name: "Право.ru",
+        rating: 4.5,
+        reviews: 1890,
+        location: "Москва",
+        phone: "+7 495 456-78-90",
+        description: "Юридические консультации",
+      },
+      {
+        name: "Консалт групп",
+        rating: 4.3,
+        reviews: 1234,
+        location: "Москва",
+        phone: "+7 495 567-89-01",
+        description: "Корпоративное право",
+      },
+    ],
+    Недвижимость: [
+      {
+        name: "ЦИАН",
+        rating: 4.4,
+        reviews: 7890,
+        location: "Москва",
+        phone: "+7 495 678-90-12",
+        description: "Коммерческая недвижимость",
+      },
+      {
+        name: "Авито Недвижимость",
+        rating: 4.2,
+        reviews: 5670,
+        location: "Москва",
+        phone: "+7 495 789-01-23",
+        description: "Аренда и продажа офисов",
+      },
+    ],
+    Логистика: [
+      {
+        name: "СДЭК",
+        rating: 4.6,
+        reviews: 8900,
+        location: "Москва",
+        phone: "+7 495 890-12-34",
+        description: "Курьерская доставка",
+      },
+      {
+        name: "Почта России",
+        rating: 3.8,
+        reviews: 12340,
+        location: "Москва",
+        phone: "+7 495 901-23-45",
+        description: "Почтовые услуги",
+      },
+      {
+        name: "DPD",
+        rating: 4.4,
+        reviews: 4560,
+        location: "Москва",
+        phone: "+7 495 012-34-56",
+        description: "Экспресс-доставка",
+      },
+    ],
+  };
+
   const categories = [
     {
       icon: CreditCard,
@@ -106,7 +296,69 @@ const ServiceCategories = () => {
                 </p>
 
                 <p className="text-xs text-blue-600 font-medium">
-                  {category.count}
+                  <Dialog>
+                    <DialogTrigger className="hover:underline cursor-pointer">
+                      {category.count}
+                    </DialogTrigger>
+                    <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                      <DialogHeader>
+                        <DialogTitle className="text-xl font-bold mb-2">
+                          {category.title}
+                        </DialogTitle>
+                        <p className="text-gray-600 mb-4">
+                          {category.description}
+                        </p>
+                      </DialogHeader>
+
+                      <div className="space-y-4">
+                        {companyData[category.title]?.map((company, index) => (
+                          <div
+                            key={index}
+                            className="border rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                          >
+                            <div className="flex justify-between items-start mb-2">
+                              <h4 className="font-semibold text-lg">
+                                {company.name}
+                              </h4>
+                              <div className="flex items-center space-x-1">
+                                <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                                <span className="text-sm font-medium">
+                                  {company.rating}
+                                </span>
+                                <span className="text-sm text-gray-500">
+                                  ({company.reviews})
+                                </span>
+                              </div>
+                            </div>
+
+                            <p className="text-gray-600 mb-3">
+                              {company.description}
+                            </p>
+
+                            <div className="flex items-center justify-between text-sm text-gray-500">
+                              <div className="flex items-center space-x-4">
+                                <div className="flex items-center space-x-1">
+                                  <MapPin className="w-4 h-4" />
+                                  <span>{company.location}</span>
+                                </div>
+                                <div className="flex items-center space-x-1">
+                                  <Phone className="w-4 h-4" />
+                                  <span>{company.phone}</span>
+                                </div>
+                              </div>
+                              <button className="text-blue-600 hover:text-blue-700 font-medium">
+                                Связаться
+                              </button>
+                            </div>
+                          </div>
+                        )) || (
+                          <p className="text-gray-500 text-center py-8">
+                            Компании скоро появятся
+                          </p>
+                        )}
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </p>
               </div>
             );
